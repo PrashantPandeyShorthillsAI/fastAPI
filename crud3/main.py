@@ -1,13 +1,13 @@
 from fastapi import FastAPI
 from core.config import settings
-from apis.app_router import page_router
+from apis.base import api_router
 
 
 from db.base import Base
 from db.session import engine
 
 def include_router(app):
-    app.include_router(page_router)
+    app.include_router(api_router)
 
 def create_tables():
     Base.metadata.create_all(bind=engine)
