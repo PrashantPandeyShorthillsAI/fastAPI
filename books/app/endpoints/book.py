@@ -30,7 +30,7 @@ def read_book(book_id: int, db: Session = Depends(get_db)):
 
 @router.put("/books/{book_id}")
 def update_book_endpoint(
-    book_id: int, name: str, author: str, description: str, rating: float, db: Session = Depends(get_db)
+    book_id: int, name: str = None, author: str = None, description: str = None, rating: float = None, db: Session = Depends(get_db)
 ):
     updated_book = update_book(db, book_id, name, author, description, rating)
     if updated_book is None:

@@ -17,13 +17,19 @@ def get_book(db: Session, book_id: int):
 def update_book(db: Session, book_id: int, name: str, author: str, description: str, rating: float):
     db_book = db.query(Book).filter(Book.id == book_id).first()
     if db_book:
-        db_book.name = name
-        db_book.author = author
-        db_book.description = description
-        db_book.rating = rating
+        if name is not None:
+            db_book.name = name
+        if author is not None:
+            db_book.author = author
+        if description is not None:
+            db_book.description = description
+        if rating is not None:
+            db_book.rating = rating
+        
         db.commit()
         db.refresh(db_book)
         return db_book
+
     return None
 
 def delete_book(db: Session, book_id: int):
